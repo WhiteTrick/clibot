@@ -21,30 +21,6 @@ import string
 import asyncio
 from functools import reduce
 
-# -----------------------------------------------------------------------
-marine1 = "What the fuck did you just fucking say about me, you little bitch?"
-marine2 = "I’ll have you know I graduated top of my class in the Navy Seals, and I’ve been involved in numerous " \
-          "secret raids on Al-Quaeda, and I have over 300 confirmed kills. "
-marine3 = "I am trained in gorilla warfare and I’m the top sniper in the entire US armed forces. You are nothing to " \
-          "me but just another target. "
-marine5 = "I will wipe you the fuck out with precision the likes of which has never been seen before on this Earth, " \
-          "mark my fucking words. "
-marine4 = 'You think you can get away with saying that shit to me over the Internet?'
-marine5 = "Think again, fucker. As we speak I am contacting my secret network of spies across the USA and your IP is " \
-          "being traced right now so you better prepare for the storm, maggot. "
-marine6 = "The storm that wipes out the pathetic little thing you call your life."
-marine7 = "You’re fucking dead, kid. I can be anywhere, anytime, and I can kill you in over seven hundred ways, " \
-          "and that’s just with my bare hands. "
-marine8 = "Not only am I extensively trained in unarmed combat, but I have access to the entire arsenal of the United " \
-          "States Marine Corps "
-marine9 = "and I will use it to its full extent to wipe your miserable ass off the face of the continent, you little " \
-          "shit. "
-marine10 = 'If only you could have known what unholy retribution your little “clever” comment was about to bring down ' \
-           'upon you, maybe you would have held your fucking tongue. '
-marine11 = "But you couldn’t, you didn’t, and now you’re paying the price, you goddamn idiot. I will shit fury all " \
-           "over you and you will drown in it. You’re fucking dead, kiddo. "
-marinepasta = [marine1, marine2, marine3, marine4, marine5, marine6, marine7, marine8, marine9, marine10, marine11]
-
 # set logging level: logs to Command Line Interface
 logging.basicConfig(level=logging.INFO)
 
@@ -166,41 +142,19 @@ async def on_message(message):
             and message.author.name != "cli-bot"):
         await clibot.add_reaction(message, '\U0001F48b')
 
-    if re.search(r'cunt', message.content, re.I) and message.author.name != 'cli-bot':
-        # adds some much needed emphasis to messages including the word
-        #    "cunt"
-        await clibot.add_reaction(message, '\U0001F1E8')
-        await clibot.add_reaction(message, '\U0001F1FA')
-        await clibot.add_reaction(message, '\U0001F1F3')
-        await clibot.add_reaction(message, '\U0001F1F9')
-
     # if (any(word in ['cli', 'clibot', 'cli-bot'] for word in
     #         message.content.lower().translate(remove_punctuation).split())
     #         and message.author.name != "cli-bot"):
     if re.search(r"cli", message.content, re.I) and message.author.name != "cli-bot":
         if re.search(r"l[ou]v", message.content, re.I):
             await clibot.add_reaction(message, '\U0001F633')
-        if re.search(r"hate|h8|fuck you", message.content, re.I):
-            await clibot.add_reaction(message, emoji=':absoluteshit:296132005203148800')
-            for marine in marinepasta:
-                await clibot.send_message(message.channel, marine, tts=True)
         if (
                 any(word in ['annoy', 'annoying'] for word in
                     message.content.lower().translate(remove_punctuation).split())):
             await clibot.add_reaction(message, '😘')
 
-    if re.match(r".*sex.*|.*fuck.*|.*penetra.*", message.content, re.I) and message.author.name != "cli-bot":
-        await clibot.add_reaction(message, '👉🏿')
-        await clibot.add_reaction(message, '👌🏻')
-
-    # if ('better' in message.content.lower().translate(remove_punctuation).split()
-    #         and 'idea' in message.content.lower().translate(remove_punctuation).split()
     if re.search(r"better.*idea|idea.*better", message.content, re.I) and message.author.name != "cli-bot":
         await clibot.add_reaction(message, emoji=':helno:370408318352490496')
-
-    # if ('make you jizz' in message.content.lower().translate(remove_punctuation) and message.author.name != 'cli-bot'):
-    if re.search(r"make you jizz", message.content, re.I):
-        await clibot.send_message(message.channel, 'cuzzi with me tonight')
 
     matchObj = re.match(r'^cli-plot ([^=]+)=([\d\+\-\*\%/\^()\.[a-zA-Z]+);?\s?(xlab=\'[^,]*\')?,?\s?(ylab=\'[^,]*\')?,?\s?(title=\'[^,]*\')?,?\s?(range\(([\+\-]?[(\d*\.?\d*)|(\d*)]{1,}),\s?([\+\-]?[(\d*\.?\d*)|(\d*)]{1,})\))?,?\s?(--autoscale)?$', message.content, re.I)
     if matchObj:
@@ -407,10 +361,7 @@ async def on_message(message):
         await clibot.send_message(message.channel, content)
 
     elif message.content.startswith('.sneeze'):
-        r = randint(1, 2)
         content = 'Bless Dustin!'
-        if r == 1:
-            content = 'Scoliosis!'
         await clibot.send_message(message.channel, content)
 
     elif (('praise the sun' in message.content.lower().translate(remove_punctuation))
@@ -430,24 +381,4 @@ async def repeater(ctx, arg):
     """ Stop repeating me """
     await clibot.send_message(ctx.message.channel, arg)
 
-
-# ==============================================================================
-#    elif (('super secret password') in message.content.lower()
-#            and message.author.name != 'cli-bot'):
-#        channel = clibot.get_channel('351969612549849088')
-#        voice = await clibot.join_voice_channel(channel)
-#        player = await voice.create_ytdl_player('https://www.youtube.com/watch?v=Vq5jHG3OqmU')
-#        player.start()
-#        
-#    elif (('cli-bot stop music') in message.content.lower()
-#            and message.author.name != 'cli-bot'):
-#        if (voice.is_connected()):
-#            player.stop()
-#        
-#    elif (('cli-bot leave voice') in message.content.lower()
-#            and message.author.name != 'cli-bot'):
-#        if (voice.is_connected()):
-#            await voice.disconnect()
-# ==============================================================================
-
-clibot.run('MzUyMjU2ODE2NzkwNTAzNDI1.DIemhQ.QTuIvrCNW5E1aLgb9PMAvdwLoc0')
+clibot.run(CATHOLOCISM)
